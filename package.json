@@ -1,0 +1,20 @@
+{
+  "name": "opencypher-jison",
+  "version": "0.1.0",
+  "description": "Jison grammar for openCypher",
+  "main": "out/cypherParser.js",
+  "repository": "https://github.com/jakeboone02/opencypher-jison.git",
+  "author": "Jake Boone",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "generate:cypher": "npx jison src/cypher.jison --outfile out/cypherParser.js --module-type commonjs",
+    "generate:ebnf": "npx jison-gho reference/cypher-2.ebnf --outfile out/cypherParserEBNF.js --module-type commonjs",
+    "generate:codemod": "npx jscodeshift -t src/cypher.codemod.js out/cypherParser.js",
+    "generate": "yarn generate:cypher && yarn generate:codemod",
+    "test": "node ./src/test.js > ./testResult.json"
+  },
+  "devDependencies": {
+    "ebnf": "^1.9.0"
+  }
+}
